@@ -3,37 +3,44 @@ from tkinter import*
 
 current_label = None
 
-
-def ans_question(): 
-    answer = int(wid1.get())
+def incorrect():
     correct_answer = number * question_number
     global current_label
+    current_label = Label(root, text=f"Incorrect, the answer is {correct_answer}.")
+    current_label.pack()
+    return False
+
+def ans_question(): 
+    global current_label
     if current_label:
-        current_label.pack_forget()
-    if answer == correct_answer:
-        current_label = Label(root, text='Correct')
-        current_label.pack()
-        return True
-    else:
-        current_label = Label(root, text=f"Incorrect, the answer is {correct_answer}.")
-        current_label.pack()
-        return False
-    
+            current_label.pack_forget()
+    try:
+        answer = int(wid1.get())
+        correct_answer = number * question_number
+        if answer == correct_answer:
+            current_label = Label(root, text='Correct')
+            current_label.pack()
+            wid1.delete(0, END)
+            return True
+        else:
+            incorrect()
+    except ValueError:
+        incorrect()
+    wid1.delete(0, END)
+
 root=Tk()
 root.title('Question')
-root.geometry('400x800')
+root.geometry('400x400')
 root.resizable(False, False)
 root.configure(bg='lightgray')
 
 wid1=Entry(root, text='enter first number')
 wid1.pack(pady=20)
 
-
 label = Label(root)
 label.pack()
 
-
-Button1= Button(root, text='The button', command=root.quit)
+Button1= Button(root, text='The button', command=root.quit)#lambda: [clear_text(),root.quit()])
 Button1.pack()
 
 result_label=Label(root, text='')
