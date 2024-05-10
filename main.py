@@ -3,21 +3,32 @@ from tkinter import*
 
 current_label = None
 
-
-def ans_question(): 
-    answer = int(wid1.get())
-    correct_answer = number * question_number
+def incorrect():
     global current_label
     if current_label:
-        current_label.pack_forget()
-    if answer == correct_answer:
-        current_label = Label(root, text='Correct')
-        current_label.pack()
-        return True
-    else:
-        current_label = Label(root, text=f"Incorrect, the answer is {correct_answer}.")
-        current_label.pack()
-        return False
+            current_label.pack_forget()
+    correct_answer = number1 * number2
+    current_label = Label(root, text=f"Incorrect, the answer is {correct_answer}.")
+    current_label.pack()
+    wid1.delete(0, END)
+    return False
+
+def ans_question():
+    try: 
+        global current_label
+        if current_label:
+            current_label.pack_forget()
+        answer = int(wid1.get())
+        correct_answer = number1 * number2
+        if answer == correct_answer:
+            current_label = Label(root, text='Correct')
+            current_label.pack()
+            return True
+        else:
+            incorrect()
+            return False
+    except ValueError:
+         incorrect()
     
 root=Tk()
 root.title('Question')
@@ -44,9 +55,9 @@ ans_correct.pack()
 
 ans_correct = 0
 for i in range(12):
-    number = random.randint(1, 12)  
-    question_number = random.randint(1, 12)
-    label.config(text=f"What is {number} x {question_number}?")
+    number1 = random.randint(1, 12)  
+    number2 = random.randint(1, 12)
+    label.config(text=f"What is {number1} x {number2}?")
     root.mainloop()
     if ans_question():
          ans_correct += 1
