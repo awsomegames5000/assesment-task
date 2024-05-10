@@ -5,8 +5,6 @@ current_label = None
 
 def incorrect():
     global current_label
-    if current_label:
-            current_label.pack_forget()
     correct_answer = number1 * number2
     current_label = Label(root, text=f"Incorrect, the answer is {correct_answer}.")
     current_label.pack()
@@ -14,15 +12,16 @@ def incorrect():
     return False
 
 def ans_question():
-    try: 
-        global current_label
-        if current_label:
+    global current_label
+    if current_label:
             current_label.pack_forget()
+    try: 
         answer = int(wid1.get())
         correct_answer = number1 * number2
         if answer == correct_answer:
             current_label = Label(root, text='Correct')
             current_label.pack()
+            wid1.delete(0, END)
             return True
         else:
             incorrect()
