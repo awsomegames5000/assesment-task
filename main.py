@@ -6,19 +6,25 @@ root = Tk()
 root.geometry('500x250')
 
 def main():
+    global frame1
+    global btn1
+    global label
+
     frame1 = Frame(root,width=500,height=250,)
     frame1.pack()
 
-    btn1 = Button(frame1,text='main page',command=main)
-    btn1.pack(expand=False)
-    btn2 = Button(frame1,text='other page',command=other)
-    btn2.pack(expand=False)
+    btn1 = Button(frame1,text='Start',command=run)
+    btn1.pack(pady=20)
 
-    label=Label(frame1,text='hello')
+    label=Label(frame1,text='Multiplication Quiz')
     label.pack(expand=False)
 
-def other():
+def run():
+    global framerun
+    global frame1
+    global result
 
+    frame1.pack_forget()
     def incorrect():
         global current_label
         if current_label:
@@ -46,7 +52,7 @@ def other():
         except ValueError:
             incorrect()
 
-
+    frame1.pack_forget()
     framerun = Frame(root,width=500,height=250)
     framerun.pack()
 
@@ -55,14 +61,11 @@ def other():
 
 
     label = Label(framerun)
-    label.pack()
+    label.pack(pady=20)
 
 
     Button1= Button(framerun, text='The button', command=root.quit)
     Button1.pack()
-
-    result_label=Label(root, text='')
-    result_label.pack()
 
     ans_correct = 0
     for i in range(12):
@@ -72,9 +75,41 @@ def other():
         root.mainloop()
         if ans_question():
             ans_correct += 1
-    question=Label(root, text=f"Test completed: Score is {ans_correct}/12")
-    question.pack()
-    Button1.config(command=lambda:None)
+    result=(f"Test completed: Score is {ans_correct}/12")
+    Button1.config(text='proceed',command=lambda:finish())
+    return result
+
+def finish():
+    global framerun
+    global current_label
+    global result
+    global MainMenu
+    global final_result
+
+    current_label.pack_forget()
+    framerun.pack_forget()
+    finalframe=Frame(root,width=500,height=250)
+    finalframe.pack(pady=20)
+    final_result=Label(finalframe,text=result)
+    final_result.pack()
+    MainMenu=Button(text='main menu',command=res)
+    MainMenu.pack()
+
+def res():
+    global frame1
+    global btn1
+    global label
+    global MainMenu
+    global final_result
+
+    MainMenu.pack_forget()
+    final_result.pack_forget()
+
+    frame1.pack()
+
+    btn1.pack(pady=20)
+
+    label.pack(expand=False)
 
 current_label=None
 main()
