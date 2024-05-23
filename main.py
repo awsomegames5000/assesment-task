@@ -97,8 +97,6 @@ def finish():
 
 def res():
     global frame1
-    global btn1
-    global label
     global MainMenu
     global final_result
 
