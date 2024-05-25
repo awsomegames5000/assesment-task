@@ -21,9 +21,9 @@ def ask_question():
         else:
             number1 = random.randint(1, 12)  
             number2 = random.randint(1, 12)
-            placeholder=number1*number2
-            correct_answer=placeholder / number1
-            answer = int(input(f"What is {placeholder} / {number1}? "))
+            product=number1*number2
+            correct_answer=product / number1
+            answer = int(input(f"What is {product} / {number1}? "))
         if answer == correct_answer:
             print("Correct")
             return True
