@@ -102,7 +102,7 @@ def res():
     global MainMenu
     global final_result
 
-    MainMenu.pack_forget()
+    MainMenu.destroy()
     final_result.pack_forget()
 
     frame1.pack()
