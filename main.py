@@ -11,20 +11,18 @@ def main():
     frame1 = Frame(root)
     frame1.pack()
 
-    # Button labels
-    button_labels = ['+', '-', '*', '/']
+    signs_labels = ['+', '-', '*', '/']
 
-    # Create the buttons and add them to the frame
     buttons = []
-    for label in button_labels:
-        button = Button(frame1, text=label, command=lambda label=label: run(label))
+
+    for signs in signs_labels:
+        button = Button(frame1, text=signs, command=lambda label=signs: run(label))
         button.pack(side=LEFT, padx=5)
         buttons.append(button)
 
 def run(operation):
     global framerun
     global frame1
-    global result
 
     frame1.pack_forget()
 
@@ -89,15 +87,15 @@ def run(operation):
             number1 = random.randint(1, 12)  
             number2 = random.randint(1, 12)
             product = number1 * number2
-            correct_answer=product / number1
+            correct_answer=product // number1
             label.config(text=f"What is {product} / {number1}? ")
         root.mainloop()
         if ans_question():
             ans_correct += 1
     result=(f"Test completed: Score is {ans_correct}/12")
-    Button1.config(text='proceed',command=lambda:finish(ans_correct))
+    Button1.config(text='Finish',command=lambda:finish(ans_correct,operation))
 
-def finish(ans_correct):
+def finish(ans_correct, operation):
     global framerun
     global current_label
     global finalframe
@@ -112,14 +110,20 @@ def finish(ans_correct):
     final_result.pack()
     MainMenu = Button(finalframe, text='Main Menu', command=res)
     MainMenu.pack()
+    retry = Button(finalframe, text='Try Again', command=lambda:restart(operation))
+    retry.pack()
 
-def res():
-    global frame1
-    global framerun
+def restart(operation):
     global finalframe
 
-    frame1.pack_forget()
-    framerun.pack_forget()
+    finalframe.pack_forget()
+
+    run(operation)
+    
+
+def res():
+    global finalframe
+
     finalframe.pack_forget()
 
     frame1.pack()
@@ -129,6 +133,5 @@ main()
 
 root.mainloop()
 
-#to do
-#add restart function (OPTIONAL)
+
 #DECORATE!!!!!!!!!!!!
