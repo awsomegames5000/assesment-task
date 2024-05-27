@@ -7,11 +7,9 @@ root.geometry('500x250')
 
 def main():
     global frame1
-    global buttons
-    global button
 
     frame1 = Frame(root)
-    frame1.pack(padx=10, pady=10)
+    frame1.pack()
 
     # Button labels
     button_labels = ['+', '-', '*', '/']
@@ -97,41 +95,34 @@ def run(operation):
         if ans_question():
             ans_correct += 1
     result=(f"Test completed: Score is {ans_correct}/12")
-    Button1.config(text='proceed',command=lambda:finish())
-    return result
+    Button1.config(text='proceed',command=lambda:finish(ans_correct))
 
-def finish():
+def finish(ans_correct):
     global framerun
     global current_label
-    global result
-    global MainMenu
-    global final_result
+    global finalframe
 
-    current_label.pack_forget()
+    if current_label:
+        current_label.pack_forget()
     framerun.pack_forget()
-    finalframe=Frame(root,width=500,height=250)
+
+    finalframe = Frame(root, width=500, height=250)
     finalframe.pack(pady=20)
-    final_result=Label(finalframe,text=result)
+    final_result = Label(finalframe, text=f"Test completed: Score is {ans_correct}/12")
     final_result.pack()
-    MainMenu=Button(text='main menu',command=res)
+    MainMenu = Button(finalframe, text='Main Menu', command=res)
     MainMenu.pack()
 
 def res():
     global frame1
-    global btn1
-    global label
-    global MainMenu
-    global final_result
-    global buttons
-    global button
+    global framerun
+    global finalframe
 
-    MainMenu.destroy()
-    final_result.pack_forget()
+    frame1.pack_forget()
+    framerun.pack_forget()
+    finalframe.pack_forget()
 
     frame1.pack()
-
-    buttons.append(button)
-
 
 current_label=None
 main()
@@ -139,6 +130,5 @@ main()
 root.mainloop()
 
 #to do
-#fix padding to which main menu doesn't keep going down
 #add restart function (OPTIONAL)
 #DECORATE!!!!!!!!!!!!
