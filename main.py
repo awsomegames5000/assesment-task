@@ -92,7 +92,6 @@ def run(operation):
         root.mainloop()
         if ans_question():
             ans_correct += 1
-    result=(f"Test completed: Score is {ans_correct}/12")
     Button1.config(text='Finish',command=lambda:finish(ans_correct,operation))
 
 def finish(ans_correct, operation):
@@ -132,6 +131,5 @@ current_label=None
 main()
 
 root.mainloop()
-
 
 #DECORATE!!!!!!!!!!!!
