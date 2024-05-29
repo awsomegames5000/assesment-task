@@ -132,7 +132,7 @@ def run(operation,difficulty):
     for i in range(12):
         qnumber.config(text=f'question {i+1}')
         if difficulty == 'Easy': #the difficulty parameter was set in the previous frame and sets the range of numbers based on the chosen difficulty
-            range1=10
+            range1=12
             range2=50
         elif difficulty == 'Medium':
             range1=16
@@ -142,23 +142,23 @@ def run(operation,difficulty):
             range2=200
 
         if operation =='+': #the operation parameter was passed from the main menu page and uses if statements to go through the possible choices
-            number = random.randint(1, range2)  
-            number2 = random.randint(1, range2)
+            number = random.randint(10, range2)  
+            number2 = random.randint(10, range2)
             correct_answer = number + number2
             label.config(text=f"What is {number} + {number2}?")
         elif operation =='-':
-            number = random.randint(1, range2)  
-            number2 = random.randint(1, range2)
+            number = random.randint(10, range2)  
+            number2 = random.randint(10, range2)
             correct_answer = number - number2
             label.config(text=f"What is {number} - {number2}?")
         if operation =='x':
-            number = random.randint(1, range1)  
-            number2 = random.randint(1, range1)
+            number = random.randint(3, range1)  
+            number2 = random.randint(3, range1)
             correct_answer = number * number2
             label.config(text=f"What is {number} x {number2}?")
         elif operation =='÷':
-            number1 = random.randint(1, range1)  
-            number2 = random.randint(1, range1)
+            number1 = random.randint(3, range1)  
+            number2 = random.randint(3, range1)
             product = number1 * number2
             correct_answer=product // number1 #this operation does the same as the normal division, but calculates using integers to remove decimal points.
             label.config(text=f"What is {product} ÷ {number1}? ")
@@ -196,16 +196,20 @@ def finish(ans_correct, operation,difficulty):
     score.pack()
     MainMenu = Button(finalframe, 
                       bg='maroon',
+                      fg='white',
                       activebackground='VioletRed3',
                       text='Main Menu', 
-                      font=('Arial',14),
+                      font=('Arial',14,'bold'),
                       command=res) #takes the program to the main menu
     
     MainMenu.pack(pady=20)
+
+
     retry = Button(finalframe, 
                    text='Try Again',
-                   font=('Arial',14),
-                   bg='maroon', 
+                   font=('Arial',14,'bold'),
+                   bg='maroon',
+                   fg='white' ,
                    activebackground='VioletRed3',
                    command=lambda:restart(operation,difficulty))
     retry.pack()
