@@ -34,10 +34,36 @@ def main():
                         bg='maroon',
                         fg='white',
                         activebackground='VioletRed3',
-                        command=lambda label=signs: run(label))
+                        command=lambda label=signs: choose_difficulty(label))
         button.pack(side=LEFT, padx=5, pady=5, expand = True, fill='both')
 
-def run(operation):
+def choose_difficulty(operation):
+    global difficulty_frame
+    global frame1
+    frame1.pack_forget()
+
+    difficulty_frame = Frame(root,
+                             bg='dark green', 
+                             width=500, height=250)
+    difficulty_frame.pack()
+    difficulty_frame.pack_propagate(0)
+
+    heading = Label(difficulty_frame,
+                    bg='dark green', 
+                    text='Select The Difficulty', 
+                    font=('Arial', 24))
+    heading.pack(pady=20)
+
+    difficulties = ['Easy', 'Medium', 'Hard']
+    for options in difficulties:
+        button = Button(difficulty_frame, 
+                        text=options, font=('Arial', 14),
+                        bg='VioletRed3',
+                        activebackground='maroon',
+                        command=lambda difficulty=options: run(operation, difficulty))
+        button.pack(pady=5, expand=True, fill='x')
+
+def run(operation,difficulty):
     global framerun
     global frame1
     global qnumber
@@ -73,7 +99,7 @@ def run(operation):
         except ValueError:
             incorrect()
 
-    frame1.pack_forget()
+    difficulty_frame.pack_forget()
     framerun = Frame(root,width=500,height=250,bg='dark green')
     framerun.pack()
     framerun.pack_propagate(0)
@@ -109,24 +135,35 @@ def run(operation):
                       font=('Arial',24,'bold'),
                       text=f'question {i+1}')
         qnumber.pack(side='bottom')
-        if operation =='x':
-            number = random.randint(1, 12)  
-            number2 = random.randint(1, 12)
-            correct_answer = number * number2
-            label.config(text=f"What is {number} x {number2}?")
-        elif operation =='+':
-            number = random.randint(1, 100)  
-            number2 = random.randint(1, 100)
+
+        if difficulty == 'Easy':
+            range1=12
+            range2=50
+        elif difficulty == 'Medium':
+            range1=18
+            range2=100
+        else:
+            range1=24
+            range2=200
+
+        if operation =='+':
+            number = random.randint(1, range2)  
+            number2 = random.randint(1, range2)
             correct_answer = number + number2
             label.config(text=f"What is {number} + {number2}?")
         elif operation =='-':
-            number = random.randint(1, 100)  
-            number2 = random.randint(1, 100)
+            number = random.randint(1, range2)  
+            number2 = random.randint(1, range2)
             correct_answer = number - number2
             label.config(text=f"What is {number} - {number2}?")
+        if operation =='x':
+            number = random.randint(1, range1)  
+            number2 = random.randint(1, range1)
+            correct_answer = number * number2
+            label.config(text=f"What is {number} x {number2}?")
         else:
-            number1 = random.randint(1, 12)  
-            number2 = random.randint(1, 12)
+            number1 = random.randint(1, range1)  
+            number2 = random.randint(1, range1)
             product = number1 * number2
             correct_answer=product // number1
             label.config(text=f"What is {product} ÷ {number1}? ")
@@ -136,9 +173,9 @@ def run(operation):
     current_label.pack_forget()
             
     qnumber.pack()
-    Button1.config(text='Finish',command=lambda:finish(ans_correct,operation))
+    Button1.config(text='Finish',command=lambda:finish(ans_correct,operation,difficulty))
 
-def finish(ans_correct, operation):
+def finish(ans_correct, operation,difficulty):
     global framerun
     global current_label
     global finalframe
@@ -177,15 +214,15 @@ def finish(ans_correct, operation):
                    font=('Arial',14),
                    bg='maroon', 
                    activebackground='VioletRed3',
-                   command=lambda:restart(operation))
+                   command=lambda:restart(operation,difficulty))
     retry.pack()
 
-def restart(operation):
+def restart(operation,difficulty):
     global finalframe
 
     finalframe.pack_forget()
 
-    run(operation)
+    run(operation,difficulty)
     
 
 def res():
@@ -200,5 +237,3 @@ qnumber = None
 main()
 
 root.mainloop()
-
-#DECORATE!!!!!!!!!!!!
