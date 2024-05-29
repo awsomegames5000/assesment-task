@@ -133,13 +133,13 @@ def run(operation,difficulty):
         qnumber.config(text=f'question {i+1}')
         if difficulty == 'Easy': #the difficulty parameter was set in the previous frame and sets the range of numbers based on the chosen difficulty
             range1=10
-            range2=40
+            range2=50
         elif difficulty == 'Medium':
-            range1=15
+            range1=16
             range2=100
         else:
             range1=20
-            range2=150
+            range2=200
 
         if operation =='+': #the operation parameter was passed from the main menu page and uses if statements to go through the possible choices
             number = random.randint(1, range2)  
@@ -190,6 +190,7 @@ def finish(ans_correct, operation,difficulty):
 
     score = Label(finalframe, #score label takes ans_correct parameter to display
                   bg='dark green',
+                  fg='white',
                   font=('Arial',24, 'bold'),
                   text=f'{ans_correct}/12')
     score.pack()
