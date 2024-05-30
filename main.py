@@ -94,9 +94,7 @@ def run(operation,difficulty):
     framerun.pack()
     framerun.pack_propagate(0)
 
-    #All widgets in this frame are packed with the side at the bottom to make it appear
-    #that the question number is the heading (qnumber). I had reversed order of the widgets
-    #to make this work.
+    #All widgets in this frame are packed with the side at the bottom to make it appearthat the question number is the heading (qnumber). I had reversed order of the widgets to make this work.
     qnumber=Label(framerun, 
                       bg='dark green',
                       font=('Arial',24,'bold'),
