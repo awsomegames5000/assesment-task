@@ -138,10 +138,10 @@ def run(operation,difficulty):
             range2=40
         elif difficulty == 'Medium':
             range1=16
-            range2=80
+            range2=120
         else:
-            range1=20
-            range2=180
+            range1=24
+            range2=200
 
         if operation =='+': #the operation parameter was passed from the main menu page and uses if statements to go through the possible choices
             number1 = random.randint(10, range2)  
