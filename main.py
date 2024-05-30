@@ -5,6 +5,8 @@ root = Tk()
 
 root.geometry('500x300')
 
+root.title('Tkinter Math Operations Quiz')
+
 root.resizable(False,False) # makes window of the program static; it cannot change.
 
 
@@ -74,15 +76,15 @@ def run(operation,difficulty):
 
     def incorrect():
         current_label.config(text=f'Incorrect: The answer is {correct_answer}')
-        wid1.delete(0, END)
+        widget.delete(0, END)
         return False
 
     def ans_question():
         try: 
-            answer = int(wid1.get())
+            answer = int(widget.get())
             if answer == correct_answer:
                 current_label.config(text='Correct')
-                wid1.delete(0, END)
+                widget.delete(0, END)
                 return True
             else:
                 incorrect()
@@ -97,26 +99,26 @@ def run(operation,difficulty):
     #All widgets in this frame are packed with the side at the bottom to make it appear
     #that the question number is the heading (qnumber). I had reversed order of the widgets
     #to make this work.
-    qnumber=Label(framerun, 
+    qheading=Label(framerun, 
                       bg='dark green',
                       font=('Arial',24,'bold'),
                       text=f'question 1')
-    qnumber.pack()
+    qheading.pack()
 
     current_label = Label(framerun, #these labels are empty placeholders which will configure to 'correct' or 'incorrect' depending on the function
                               bg='dark green', 
                               font=('Arial',14))
     current_label.pack()
     
-    label = Label(framerun, #label packs the questions
+    question_label = Label(framerun, #label packs the questions
                   bg='dark green',
                   font=('Arial',18))
     
-    label.pack()
-    wid1=Entry(framerun, 
+    question_label.pack()
+    widget=Entry(framerun, 
                font=('Arial',18),
                text='enter first number')
-    wid1.pack(expand=True) #entry widget for the answers
+    widget.pack(expand=True) #entry widget for the answers
 
     Button1= Button(framerun, #button runs the function once user submits the answer
                     text='Enter',
@@ -134,7 +136,7 @@ def run(operation,difficulty):
 
     ans_correct = 0
     for i in range(12):
-        qnumber.config(text=f'question {i+1}')
+        qheading.config(text=f'question {i+1}')
         if difficulty == 'Easy': #the difficulty parameter was set in the previous frame and sets the range of numbers based on the chosen difficulty
             range1=12
             range2=50
@@ -146,32 +148,32 @@ def run(operation,difficulty):
             range2=200
 
         if operation =='+': #the operation parameter was passed from the main menu page and uses if statements to go through the possible choices
-            number = random.randint(10, range2)  
+            number1 = random.randint(10, range2)  
             number2 = random.randint(10, range2)
-            correct_answer = number + number2
-            label.config(text=f"What is {number} + {number2}?")
+            correct_answer = number1 + number2
+            question_label.config(text=f"What is {number1} + {number2}?")
         elif operation =='-':
-            number = random.randint(10, range2)  
+            number1 = random.randint(10, range2)  
             number2 = random.randint(10, range2)
-            correct_answer = number - number2
-            label.config(text=f"What is {number} - {number2}?")
+            correct_answer = number1 - number2
+            question_label.config(text=f"What is {number1} - {number2}?")
         if operation =='x':
-            number = random.randint(3, range1)  
+            number1 = random.randint(3, range1)  
             number2 = random.randint(3, range1)
-            correct_answer = number * number2
-            label.config(text=f"What is {number} x {number2}?")
+            correct_answer = number1 * number2
+            question_label.config(text=f"What is {number1} x {number2}?")
         elif operation =='÷':
             number1 = random.randint(3, range1)  
             number2 = random.randint(3, range1)
             product = number1 * number2
             correct_answer=product // number1 #this operation does the same as the normal division, but calculates using integers to remove decimal points.
-            label.config(text=f"What is {product} ÷ {number1}? ")
+            question_label.config(text=f"What is {product} ÷ {number1}? ")
         root.mainloop()
         if ans_question():
             ans_correct += 1
             score.config(text=f'{ans_correct}/12 correct')
             
-    qnumber.pack()
+    qheading.pack()
     Button1.config(text='Finish',command=lambda:finish(ans_correct,operation,difficulty)) #Once the test finishes, the button configures to move the program to the next frame
 
 
