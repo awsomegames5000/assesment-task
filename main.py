@@ -3,7 +3,7 @@ import random
 
 root = Tk()
 
-root.geometry('500x250')
+root.geometry('500x300')
 
 root.resizable(False,False) # makes window of the program static; it cannot change.
 
@@ -14,7 +14,7 @@ def main():
 
     frame1 = Frame(root,
                    bg='dark green',
-                   width=500,height=250)
+                   width=500,height=300)
     frame1.pack()
     frame1.pack_propagate(0)#better catches the background colour as the frames of my program used to be controlled by its children.
                             #using this command, the program will stick to the original height and width that I set.
@@ -38,6 +38,8 @@ def main():
                         command=lambda label=signs: choose_difficulty(label)) #lambda offers a buffer to the code which usually runs the 
         button.pack(side='left', padx=5, pady=5, expand = True, fill='both')    #next function rather than waiting for the user to click a button. This will return an operation parameter
 
+
+
 def choose_difficulty(operation):
     global difficulty_frame #globally declared so the function can wipe the previous frame out
     global frame1
@@ -45,7 +47,7 @@ def choose_difficulty(operation):
 
     difficulty_frame = Frame(root,
                              bg='dark green', 
-                             width=500, height=250)
+                             width=500, height=300)
     difficulty_frame.pack()
     difficulty_frame.pack_propagate(0)
 
@@ -62,7 +64,9 @@ def choose_difficulty(operation):
                         bg='VioletRed3',
                         activebackground='maroon',
                         command=lambda difficulty=options: run(operation, difficulty)) #carries operation and difficulty parameter
-        button.pack(pady=5, expand=True, fill='x')
+        button.pack(pady=10, expand=True, fill='both')
+
+
 
 def run(operation,difficulty):
     global framerun
@@ -86,7 +90,7 @@ def run(operation,difficulty):
             incorrect()
 
     difficulty_frame.pack_forget() #run function starts here, removing the difficulty frame from the program
-    framerun = Frame(root,width=500,height=250,bg='dark green')
+    framerun = Frame(root,width=500,height=300,bg='dark green')
     framerun.pack()
     framerun.pack_propagate(0)
 
@@ -170,6 +174,8 @@ def run(operation,difficulty):
     qnumber.pack()
     Button1.config(text='Finish',command=lambda:finish(ans_correct,operation,difficulty)) #Once the test finishes, the button configures to move the program to the next frame
 
+
+
 def finish(ans_correct, operation,difficulty):
     global framerun
     global finalframe
@@ -214,6 +220,8 @@ def finish(ans_correct, operation,difficulty):
                    command=lambda:restart(operation,difficulty))
     retry.pack()
 
+
+
 def restart(operation,difficulty): #This function removes the previous frame and restarts the run function while taking the parameters the user chose.
     global finalframe
 
@@ -221,6 +229,7 @@ def restart(operation,difficulty): #This function removes the previous frame and
 
     run(operation,difficulty)
     
+
 
 def res(): #This function removes the previous frame but takes the user to the main menu frame.
     global finalframe
