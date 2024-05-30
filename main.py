@@ -174,11 +174,11 @@ def run(operation,difficulty):
             score.config(text=f'{ans_correct}/12 correct')
             
     qheading.pack()
-    Button1.config(text='Finish',command=lambda:finish(ans_correct,operation,difficulty)) #Once the test finishes, the button configures to move the program to the next frame
+    Button1.config(text='Finish',command=lambda:results(ans_correct,operation,difficulty)) #Once the test finishes, the button configures to move the program to the next frame
 
 
 
-def finish(ans_correct, operation,difficulty):
+def results(ans_correct, operation,difficulty):
     global framerun
     global finalframe
 
