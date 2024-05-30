@@ -135,13 +135,13 @@ def run(operation,difficulty):
         question_number.config(text=f'question {i+1}')
         if difficulty == 'Easy': #the difficulty parameter was set in the previous frame and sets the range of numbers based on the chosen difficulty
             range1=12
-            range2=50
+            range2=40
         elif difficulty == 'Medium':
             range1=16
-            range2=100
+            range2=80
         else:
             range1=20
-            range2=200
+            range2=180
 
         if operation =='+': #the operation parameter was passed from the main menu page and uses if statements to go through the possible choices
             number1 = random.randint(10, range2)  
