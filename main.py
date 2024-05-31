@@ -101,7 +101,7 @@ def run(operation,difficulty):
     question_number=Label(runframe, 
                       bg='dark green',
                       font=('Arial',24,'bold'),
-                      text=f'question 1')
+                      text=f'Question 1')
     question_number.pack()
 
     answer_label = Label(runframe, #these labels are empty placeholders which will configure to 'correct' or 'incorrect' depending on the function
@@ -141,7 +141,7 @@ def run(operation,difficulty):
 
     ans_correct = 0
     for i in range(12):
-        question_number.config(text=f'question {i+1}')
+        question_number.config(text=f'Question {i+1}')
         if difficulty == 'Easy': #the difficulty parameter was set in the previous frame and sets the range of numbers based on the chosen difficulty
             range1=12
             range2=40
@@ -177,7 +177,8 @@ def run(operation,difficulty):
         if ans_question():
             ans_correct += 1
             score.config(text=f'{ans_correct}/12 correct')
-            
+
+    question_widget.pack_forget()    
     question_number.pack()
     Button1.config(text='Finish',command=lambda:finish(ans_correct,operation,difficulty)) #Once the test finishes, the button configures to move the program to the next frame
 
