@@ -74,6 +74,7 @@ def run(operation,difficulty):
 
     def incorrect():
         answer_label.config(text=f'Incorrect: The answer is {correct_answer}')
+        error_label.config(text='')
         question_widget.delete(0, END)
         return False
 
@@ -83,11 +84,13 @@ def run(operation,difficulty):
             if answer == correct_answer:
                 answer_label.config(text='Correct')
                 question_widget.delete(0, END)
+                error_label.config(text='')
                 return True
             else:
                 incorrect()
         except ValueError:
             incorrect()
+            error_label.config(text='Error, please input an integer number')
 
     difficulty_frame.pack_forget() #run function starts here, removing the difficulty frame from the program
     runframe = Frame(root,width=500,height=300,bg='dark green')
@@ -123,6 +126,12 @@ def run(operation,difficulty):
                     activebackground='VioletRed3',
                     command=root.quit)
     Button1.pack(expand='true')
+
+    error_label = Label(runframe, 
+                  bg='dark green',
+                  font=('Arial',12,'bold'),
+                  )
+    error_label.pack()
 
     score = Label(runframe, 
                   bg='dark green',
